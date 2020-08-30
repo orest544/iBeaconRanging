@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		A216F92224FC00CE00A97483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92124FC00CE00A97483 /* AppDelegate.swift */; };
 		A216F92424FC00CE00A97483 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92324FC00CE00A97483 /* SceneDelegate.swift */; };
-		A216F92624FC00CE00A97483 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92524FC00CE00A97483 /* ViewController.swift */; };
+		A216F92624FC00CE00A97483 /* BeaconInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92524FC00CE00A97483 /* BeaconInfoVC.swift */; };
 		A216F92924FC00CE00A97483 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A216F92724FC00CE00A97483 /* Main.storyboard */; };
 		A216F92B24FC00D000A97483 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A216F92A24FC00D000A97483 /* Assets.xcassets */; };
 		A216F92E24FC00D000A97483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A216F92C24FC00D000A97483 /* LaunchScreen.storyboard */; };
+		A225AE4A24FC13EF0068222D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225AE4924FC13EF0068222D /* Debug.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A216F91E24FC00CE00A97483 /* iBeaconRangingMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeaconRangingMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A216F92124FC00CE00A97483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A216F92324FC00CE00A97483 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A216F92524FC00CE00A97483 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A216F92524FC00CE00A97483 /* BeaconInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconInfoVC.swift; sourceTree = "<group>"; };
 		A216F92824FC00CE00A97483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A216F92A24FC00D000A97483 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A216F92D24FC00D000A97483 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A216F92F24FC00D000A97483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A225AE4924FC13EF0068222D /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,9 +68,10 @@
 		A216F93524FC00F800A97483 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				A216F92F24FC00D000A97483 /* Info.plist */,
 				A216F92124FC00CE00A97483 /* AppDelegate.swift */,
 				A216F92324FC00CE00A97483 /* SceneDelegate.swift */,
-				A216F92F24FC00D000A97483 /* Info.plist */,
+				A225AE4924FC13EF0068222D /* Debug.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -76,7 +79,7 @@
 		A216F93624FC011300A97483 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A216F92524FC00CE00A97483 /* ViewController.swift */,
+				A216F92524FC00CE00A97483 /* BeaconInfoVC.swift */,
 				A216F92724FC00CE00A97483 /* Main.storyboard */,
 				A216F92C24FC00D000A97483 /* LaunchScreen.storyboard */,
 			);
@@ -154,7 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A216F92624FC00CE00A97483 /* ViewController.swift in Sources */,
+				A216F92624FC00CE00A97483 /* BeaconInfoVC.swift in Sources */,
+				A225AE4A24FC13EF0068222D /* Debug.swift in Sources */,
 				A216F92224FC00CE00A97483 /* AppDelegate.swift in Sources */,
 				A216F92424FC00CE00A97483 /* SceneDelegate.swift in Sources */,
 			);
@@ -303,6 +307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6Y5S54D52;
 				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Core/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +315,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = opapps.iBeaconRangingMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,6 +326,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6Y5S54D52;
 				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Core/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,7 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = opapps.iBeaconRangingMonitoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
