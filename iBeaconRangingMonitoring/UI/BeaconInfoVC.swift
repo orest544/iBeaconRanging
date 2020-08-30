@@ -11,6 +11,9 @@ import CoreLocation
 
 final class BeaconInfoVC: UIViewController {
     
+    @IBOutlet private weak var beaconRegionStateLabel: UILabel!
+    @IBOutlet private weak var beaconInfoLabel: UILabel!
+    
     private let locationManager = CLLocationManager()
     private let beaconUUIDString = "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
     
@@ -40,7 +43,28 @@ final class BeaconInfoVC: UIViewController {
         
         locationManager.startMonitoring(for: beaconRegion)
     }
-
+    
+    private func updateBeaconRegionState(by regionState: CLRegionState) {
+        switch regionState {
+        case .inside:
+            beaconRegionStateLabel.text = "Inside of the beacon range"
+        case .outside:
+            beaconRegionStateLabel.text = "Outside of the beacon range"
+        case .unknown:
+            beaconRegionStateLabel.text = "Unknown beacon range"
+        }
+    }
+    
+    private func updateBeaconInfo(about beacon: CLBeacon) {
+        beaconInfoLabel.text =
+        """
+        UUID: \(beacon.uuid.uuidString)
+        major: \(beacon.major)
+        minor: \(beacon.minor)
+        proximity: \(beacon.proximity.description)
+        signal: \(beacon.rssi)
+        """
+    }
 }
 
 // MARK: - Location Delegate
@@ -54,21 +78,22 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
         
         switch state {
         case .inside:
-            printDebugMessage(for: Self.self, message: "locationManager didDetermineState: inside")
             locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
-        case .outside:
-            printDebugMessage(for: Self.self, message: "locationManager didDetermineState: outside")
-            locationManager.stopRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
-        case .unknown:
-            printDebugMessage(for: Self.self, message: "locationManager didDetermineState: unknown")
+        case .outside, .unknown:
             locationManager.stopRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
         }
+        
+        updateBeaconRegionState(by: state)
     }
     
     func locationManager(_ manager: CLLocationManager,
                          didRange beacons: [CLBeacon],
                          satisfying beaconConstraint: CLBeaconIdentityConstraint) {
-        print(beacons)
+        guard let beacon = beacons.first else {
+            return
+        }
+
+        updateBeaconInfo(about: beacon)
     }
     
     
