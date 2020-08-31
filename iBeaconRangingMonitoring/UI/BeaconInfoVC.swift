@@ -12,6 +12,7 @@
 // add location region notif triger (when user is on some range near the shop, remind about the app) // do not require the Always location // UNLocationNotificationTrigger
 // record when the user come inside of range // userDefaults or firebase (analytics)
 // iOS 13? need older?
+// investigate how to monitor more then 20 different constraints regions
 
 import UIKit
 import CoreLocation
@@ -27,6 +28,7 @@ final class BeaconInfoVC: UIViewController {
     private let notificationCenter = UNUserNotificationCenter.current()
     private let locationManager = CLLocationManager()
     private let beaconUUIDString = "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
+    private let targetBeaconMajorValue: UInt16 = 1000
 
     // MARK: - Lifecycle
     
@@ -88,8 +90,9 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
             locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
         case .outside, .unknown:
             locationManager.stopRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
+            notificationCenter.scheduleBeaconNotification(by: state)
         }
-        notificationCenter.scheduleBeaconNotification(by: state)
+//        notificationCenter.scheduleBeaconNotification(by: state)
         updateRegionStateLabel(by: state)
     }
     
@@ -98,6 +101,11 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
                          satisfying beaconConstraint: CLBeaconIdentityConstraint) {
         guard let beacon = beacons.first else {
             return
+        }
+        
+        let beaconMajorValue = beacon.major.uint16Value
+        if beaconMajorValue == targetBeaconMajorValue {
+            notificationCenter.scheduleBeaconNotification(by: .inside, major: beaconMajorValue)
         }
         updateBeaconInfoLabel(about: beacon)
         // proximity unknown and signal 0 also can be considered as Outside of the range, cuz the region state changes to .outside with delay // but ranging

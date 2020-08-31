@@ -46,29 +46,35 @@ extension CLAuthorizationStatus {
 }
 
 extension UNUserNotificationCenter {
-    func scheduleBeaconNotification(by regionState: CLRegionState) {
-        let content = UNMutableNotificationContent()
-        content.sound = .default
-        content.badge = 1
+    func scheduleBeaconNotification(by regionState: CLRegionState, major: UInt16? = nil) {
+        let identifier = "BeaconRegionState\(regionState.rawValue)\(major ?? 0)"
         
-        content.title = "Beacon"
-        switch regionState {
-        case .inside:
-            content.body = "Inside of the beacon range"
-        case .outside:
-            content.body = "Outside of the beacon range"
-        case .unknown:
-            content.body = "Unknown beacon range"
-        }
-        
-        let identifier = "BeaconRegionState\(regionState.rawValue)"
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        add(request) { (error) in
-            if let error = error {
-                printDebugMessage(for: Self.self, message: "UNNotificationRequest Error \(error.localizedDescription)")
-            } else {
-                printDebugMessage(for: Self.self, message: "UNNotificationRequest Success")
+        getPendingNotificationRequests { [weak self] (notifications) in
+            let alreadyScheduledNotification = notifications.first { $0.identifier == identifier }
+            guard alreadyScheduledNotification == nil else {
+                return
+            }
+            
+            let content = UNMutableNotificationContent()
+            content.sound = .default
+            content.badge = 1
+            content.title = "Beacon"
+            switch regionState {
+            case .inside:
+                content.body = "Inside of the beacon range, with MAJOR: \(String(describing: major))"
+            case .outside:
+                content.body = "Outside of the beacon range"
+            case .unknown:
+                content.body = "Unknown beacon range"
+            }
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            self?.add(request) { (error) in
+                if let error = error {
+                    printDebugMessage(for: Self.self, message: "UNNotificationRequest Error \(error.localizedDescription)")
+                } else {
+                    printDebugMessage(for: Self.self, message: "UNNotificationRequest Success")
+                }
             }
         }
     }
