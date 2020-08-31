@@ -22,10 +22,10 @@
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>BLE usage description</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Always description</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Location When In Use and Always description</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location Always description</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location When In Use description</string>
 	<key>UIApplicationSceneManifest</key>

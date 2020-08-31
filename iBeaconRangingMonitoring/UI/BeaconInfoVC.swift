@@ -14,6 +14,9 @@
 // iOS 13? need older?
 // investigate how to monitor more then 20 different constraints regions
 
+// problem:
+// need Always location, Background App Refresh, low energy mode
+
 import UIKit
 import CoreLocation
 import UserNotifications
@@ -28,7 +31,6 @@ final class BeaconInfoVC: UIViewController {
     private let notificationCenter = UNUserNotificationCenter.current()
     private let locationManager = CLLocationManager()
     private let beaconUUIDString = "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
-    private let targetBeaconMajorValue: UInt16 = 1000
 
     // MARK: - Lifecycle
     
@@ -52,11 +54,10 @@ final class BeaconInfoVC: UIViewController {
         let beaconRegion = CLBeaconRegion(beaconIdentityConstraint: constraint,
                                           identifier: beaconUUID.uuidString)
         locationManager.startMonitoring(for: beaconRegion)
-//        locationManager.requestState(for: beaconRegion)
-        // Interesting:
-//        beaconRegion.notifyOnEntry = true
-//        beaconRegion.notifyOnExit = true // can disable notif about leaving range
-//        beaconRegion.notifyEntryStateOnDisplay = true // each time the location manager sends beacon notifications when the user turns on the display and the device is already inside the region.
+        locationManager.requestState(for: beaconRegion)
+        // TODO: default is true, can be removed
+        beaconRegion.notifyOnEntry = true
+        beaconRegion.notifyOnExit = true
     }
 }
 
@@ -64,7 +65,8 @@ final class BeaconInfoVC: UIViewController {
 extension BeaconInfoVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,
                          didChangeAuthorization status: CLAuthorizationStatus) {
-        printDebugMessage(for: Self.self, message: "\(status.description)")
+        printDebugMessage(for: Self.self, message: "Location status: \(status.description)")
+        
         switch status {
         case .authorizedWhenInUse:
             startMonitoring()
@@ -90,9 +92,8 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
             locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
         case .outside, .unknown:
             locationManager.stopRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
-            notificationCenter.scheduleBeaconNotification(by: state)
         }
-//        notificationCenter.scheduleBeaconNotification(by: state)
+        notificationCenter.scheduleBeaconNotification(by: state)
         updateRegionStateLabel(by: state)
     }
     
@@ -104,11 +105,13 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
         }
         
         let beaconMajorValue = beacon.major.uint16Value
-        if beaconMajorValue == targetBeaconMajorValue {
-            notificationCenter.scheduleBeaconNotification(by: .inside, major: beaconMajorValue)
-        }
+        notificationCenter.scheduleNotification(
+            with: """
+            didRange beacon: major - \(beaconMajorValue),
+            proximity: \(beacon.proximity.description)
+            """
+        )
         updateBeaconInfoLabel(about: beacon)
-        // proximity unknown and signal 0 also can be considered as Outside of the range, cuz the region state changes to .outside with delay // but ranging
     }
 }
 
