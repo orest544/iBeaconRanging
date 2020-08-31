@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010C8F6AED439E0F5F2FFA13 /* Pods_iBeaconRangingMonitoring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D61D3D17B676117B03A88F /* Pods_iBeaconRangingMonitoring.framework */; };
 		A216F92224FC00CE00A97483 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92124FC00CE00A97483 /* AppDelegate.swift */; };
 		A216F92424FC00CE00A97483 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92324FC00CE00A97483 /* SceneDelegate.swift */; };
 		A216F92624FC00CE00A97483 /* BeaconInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216F92524FC00CE00A97483 /* BeaconInfoVC.swift */; };
@@ -15,9 +16,12 @@
 		A216F92E24FC00D000A97483 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A216F92C24FC00D000A97483 /* LaunchScreen.storyboard */; };
 		A225AE4A24FC13EF0068222D /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225AE4924FC13EF0068222D /* Debug.swift */; };
 		A225AE4C24FC21270068222D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A225AE4B24FC21270068222D /* Extensions.swift */; };
+		A243F4BD24FD7F490019A58B /* FirestoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A243F4BC24FD7F490019A58B /* FirestoreClient.swift */; };
+		A2EB486024FD68BE004DD61E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2EB485F24FD68BE004DD61E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F166B1AFDCBB8061663102F /* Pods-iBeaconRangingMonitoring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBeaconRangingMonitoring.debug.xcconfig"; path = "Target Support Files/Pods-iBeaconRangingMonitoring/Pods-iBeaconRangingMonitoring.debug.xcconfig"; sourceTree = "<group>"; };
 		A216F91E24FC00CE00A97483 /* iBeaconRangingMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBeaconRangingMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A216F92124FC00CE00A97483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A216F92324FC00CE00A97483 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +32,10 @@
 		A216F92F24FC00D000A97483 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A225AE4924FC13EF0068222D /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		A225AE4B24FC21270068222D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A243F4BC24FD7F490019A58B /* FirestoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreClient.swift; sourceTree = "<group>"; };
+		A2EB485F24FD68BE004DD61E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2D61D3D17B676117B03A88F /* Pods_iBeaconRangingMonitoring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iBeaconRangingMonitoring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB56700C6F0F424CFF2C527 /* Pods-iBeaconRangingMonitoring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iBeaconRangingMonitoring.release.xcconfig"; path = "Target Support Files/Pods-iBeaconRangingMonitoring/Pods-iBeaconRangingMonitoring.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010C8F6AED439E0F5F2FFA13 /* Pods_iBeaconRangingMonitoring.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13D8DDCB2F23506ED5888821 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F166B1AFDCBB8061663102F /* Pods-iBeaconRangingMonitoring.debug.xcconfig */,
+				ECB56700C6F0F424CFF2C527 /* Pods-iBeaconRangingMonitoring.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A216F91524FC00CE00A97483 = {
 			isa = PBXGroup;
 			children = (
 				A216F92024FC00CE00A97483 /* iBeaconRangingMonitoring */,
 				A216F91F24FC00CE00A97483 /* Products */,
+				13D8DDCB2F23506ED5888821 /* Pods */,
+				EA3C5B9CF10EBF77B79BA4AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +83,8 @@
 				A216F93624FC011300A97483 /* UI */,
 				A216F93524FC00F800A97483 /* Core */,
 				A216F92A24FC00D000A97483 /* Assets.xcassets */,
+				A216F92F24FC00D000A97483 /* Info.plist */,
+				A2EB485F24FD68BE004DD61E /* GoogleService-Info.plist */,
 			);
 			path = iBeaconRangingMonitoring;
 			sourceTree = "<group>";
@@ -70,11 +92,11 @@
 		A216F93524FC00F800A97483 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				A216F92F24FC00D000A97483 /* Info.plist */,
 				A216F92124FC00CE00A97483 /* AppDelegate.swift */,
 				A216F92324FC00CE00A97483 /* SceneDelegate.swift */,
 				A225AE4924FC13EF0068222D /* Debug.swift */,
 				A225AE4B24FC21270068222D /* Extensions.swift */,
+				A243F4BC24FD7F490019A58B /* FirestoreClient.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -89,6 +111,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		EA3C5B9CF10EBF77B79BA4AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2D61D3D17B676117B03A88F /* Pods_iBeaconRangingMonitoring.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -96,9 +126,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A216F93224FC00D000A97483 /* Build configuration list for PBXNativeTarget "iBeaconRangingMonitoring" */;
 			buildPhases = (
+				8648F0220796F4BA38CD993C /* [CP] Check Pods Manifest.lock */,
 				A216F91A24FC00CE00A97483 /* Sources */,
 				A216F91B24FC00CE00A97483 /* Frameworks */,
 				A216F91C24FC00CE00A97483 /* Resources */,
+				B34444328DE8F2EAE46C5775 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A216F92E24FC00D000A97483 /* LaunchScreen.storyboard in Resources */,
+				A2EB486024FD68BE004DD61E /* GoogleService-Info.plist in Resources */,
 				A216F92B24FC00D000A97483 /* Assets.xcassets in Resources */,
 				A216F92924FC00CE00A97483 /* Main.storyboard in Resources */,
 			);
@@ -155,12 +188,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8648F0220796F4BA38CD993C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iBeaconRangingMonitoring-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B34444328DE8F2EAE46C5775 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iBeaconRangingMonitoring/Pods-iBeaconRangingMonitoring-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iBeaconRangingMonitoring/Pods-iBeaconRangingMonitoring-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iBeaconRangingMonitoring/Pods-iBeaconRangingMonitoring-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A216F91A24FC00CE00A97483 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A225AE4C24FC21270068222D /* Extensions.swift in Sources */,
+				A243F4BD24FD7F490019A58B /* FirestoreClient.swift in Sources */,
 				A216F92624FC00CE00A97483 /* BeaconInfoVC.swift in Sources */,
 				A225AE4A24FC13EF0068222D /* Debug.swift in Sources */,
 				A216F92224FC00CE00A97483 /* AppDelegate.swift in Sources */,
@@ -306,11 +382,12 @@
 		};
 		A216F93324FC00D000A97483 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F166B1AFDCBB8061663102F /* Pods-iBeaconRangingMonitoring.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6Y5S54D52;
-				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Core/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -325,11 +402,12 @@
 		};
 		A216F93424FC00D000A97483 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECB56700C6F0F424CFF2C527 /* Pods-iBeaconRangingMonitoring.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B6Y5S54D52;
-				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Core/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/iBeaconRangingMonitoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

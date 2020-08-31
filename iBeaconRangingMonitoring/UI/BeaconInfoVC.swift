@@ -19,7 +19,6 @@
 
 import UIKit
 import CoreLocation
-import UserNotifications
 
 final class BeaconInfoVC: UIViewController {
     
@@ -31,7 +30,9 @@ final class BeaconInfoVC: UIViewController {
     private let notificationCenter = UNUserNotificationCenter.current()
     private let locationManager = CLLocationManager()
     private let beaconUUIDString = "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
-
+    
+    private let dbClient = FirestoreClient()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -54,10 +55,9 @@ final class BeaconInfoVC: UIViewController {
         let beaconRegion = CLBeaconRegion(beaconIdentityConstraint: constraint,
                                           identifier: beaconUUID.uuidString)
         locationManager.startMonitoring(for: beaconRegion)
-        locationManager.requestState(for: beaconRegion)
-        // TODO: default is true, can be removed
-        beaconRegion.notifyOnEntry = true
-        beaconRegion.notifyOnExit = true
+//        // TODO: default is true, can be removed
+//        beaconRegion.notifyOnEntry = true
+//        beaconRegion.notifyOnExit = true
     }
 }
 
@@ -72,7 +72,7 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
             startMonitoring()
             manager.requestAlwaysAuthorization()
         case .authorizedAlways:
-            manager.allowsBackgroundLocationUpdates = true
+//            manager.allowsBackgroundLocationUpdates = true
             startMonitoring()
         default:
             break
@@ -91,6 +91,7 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
         case .inside:
             locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
         case .outside, .unknown:
+            dbClient.isRecorded = false
             locationManager.stopRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
         }
         notificationCenter.scheduleBeaconNotification(by: state)
@@ -104,6 +105,9 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
             return
         }
         
+        // testing internet request in background
+        dbClient.incrementCounter()
+
         let beaconMajorValue = beacon.major.uint16Value
         notificationCenter.scheduleNotification(
             with: """
