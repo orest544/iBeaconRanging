@@ -21,8 +21,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beacon range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFD-68-QGB">
-                                <rect key="frame" x="147" y="379.5" width="120" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beacon range state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFD-68-QGB">
+                                <rect key="frame" x="123.5" y="379.5" width="167.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -32,7 +32,6 @@
                         <constraints>
                             <constraint firstItem="aWd-xg-uyP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="1ZI-lV-uMa"/>
                             <constraint firstItem="rFD-68-QGB" firstAttribute="centerX" secondItem="aWd-xg-uyP" secondAttribute="centerX" id="LJG-jC-D9m"/>
-                            <constraint firstItem="aWd-xg-uyP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lhk-Pt-Z54"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aWd-xg-uyP" secondAttribute="trailing" constant="16" id="mKT-6G-2N8"/>
                             <constraint firstItem="aWd-xg-uyP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="r2n-a5-hKO"/>
                             <constraint firstItem="aWd-xg-uyP" firstAttribute="top" secondItem="rFD-68-QGB" secondAttribute="bottom" constant="30" id="wCo-41-A5a"/>
