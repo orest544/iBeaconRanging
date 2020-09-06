@@ -10,12 +10,10 @@
 
 // TODO:
 // add location region notif triger (when user is on some range near the shop, remind about the app) // do not require the Always location // UNLocationNotificationTrigger
-// record when the user come inside of range // userDefaults or firebase (analytics)
-// iOS 13? need older?
-// investigate how to monitor more then 20 different constraints regions
 
 // problem:
-// need Always location, Background App Refresh, low energy mode
+// need Always location, low energy mode
+// iOS 14 accuracyAuthorization .reducedAccuracy Location (region monitoring will work only when .fullAccuracy)
 
 import UIKit
 import CoreLocation
@@ -29,7 +27,7 @@ final class BeaconInfoVC: UIViewController {
 
     private let notificationCenter = UNUserNotificationCenter.current()
     private let locationManager = CLLocationManager()
-    private let beaconUUIDString = "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
+    private let beaconUUIDString = "f7826da6-4fa2-4e98-8024-bc5b71e0893e" // "012f62c2-ee7c-4591-9ea3-b94943de7bbb"
     
     private let dbClient = FirestoreClient()
     
@@ -48,16 +46,14 @@ final class BeaconInfoVC: UIViewController {
     // MARK: - Methods
     
     private func startMonitoring() {
-        guard let beaconUUID = UUID(uuidString: beaconUUIDString) else {
-            return
+        guard CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self),
+            let beaconUUID = UUID(uuidString: beaconUUIDString) else {
+                return
         }
         let constraint = CLBeaconIdentityConstraint(uuid: beaconUUID)
         let beaconRegion = CLBeaconRegion(beaconIdentityConstraint: constraint,
                                           identifier: beaconUUID.uuidString)
         locationManager.startMonitoring(for: beaconRegion)
-//        // TODO: default is true, can be removed
-//        beaconRegion.notifyOnEntry = true
-//        beaconRegion.notifyOnExit = true
     }
 }
 
@@ -72,20 +68,20 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
             startMonitoring()
             manager.requestAlwaysAuthorization()
         case .authorizedAlways:
-//            manager.allowsBackgroundLocationUpdates = true
             startMonitoring()
         default:
             break
         }
     }
     
-    // MARK: - Beacon
-   
+    // MARK: Beacon monitoring
+    
     func locationManager(_ manager: CLLocationManager,
                          didDetermineState state: CLRegionState,
                          for region: CLRegion) {
-        guard let beaconRegion = region as? CLBeaconRegion else {
-            return
+        guard CLLocationManager.isRangingAvailable(),
+            let beaconRegion = region as? CLBeaconRegion else {
+                return
         }
         switch state {
         case .inside:
@@ -98,24 +94,26 @@ extension BeaconInfoVC: CLLocationManagerDelegate {
         updateRegionStateLabel(by: state)
     }
     
+    // MARK: Beacon ranging
+    
     func locationManager(_ manager: CLLocationManager,
                          didRange beacons: [CLBeacon],
                          satisfying beaconConstraint: CLBeaconIdentityConstraint) {
-        guard let beacon = beacons.first else {
+        guard let nearestBeacon = beacons.first else {
             return
         }
         
         // testing internet request in background
         dbClient.incrementCounter()
 
-        let beaconMajorValue = beacon.major.uint16Value
+        let beaconMajorValue = CLBeaconMajorValue(truncating: nearestBeacon.major)
         notificationCenter.scheduleNotification(
             with: """
             didRange beacon: major - \(beaconMajorValue),
-            proximity: \(beacon.proximity.description)
+            proximity: \(nearestBeacon.proximity.description)
             """
         )
-        updateBeaconInfoLabel(about: beacon)
+        updateBeaconInfoLabel(about: nearestBeacon)
     }
 }
 
